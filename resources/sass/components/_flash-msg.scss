@@ -1,0 +1,22 @@
+.flash-msg {
+    position: fixed;
+    top: 0;
+    display: block;
+    width: 100%;
+    text-align: center;
+    letter-spacing: 2px;
+    padding-top: 1.2rem;
+    padding-bottom: 1.2rem;
+
+    animation: flashMsg 2s cubic-bezier(0.895, 0.03, 0.685, 0.22) forwards;
+
+    &--success {
+        color: $color-white;
+        background-color: rgba(#2980b9, .6);
+    }
+
+    &--alert {
+        color: $color-white;
+        background-color: rgba(#e74c3c, .6);
+    }
+}

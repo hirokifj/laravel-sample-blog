@@ -1,0 +1,31 @@
+.u-center-text { text-align: center !important; }
+
+.u-mb-small { margin-bottom: 1.5rem !important; }
+.u-mb-medium { margin-bottom: 4rem !important; }
+.u-mb-big { margin-bottom: 8rem !important; }
+.u-mb-huge { margin-bottom: 10rem !important; }
+
+.u-mt-small { margin-top: 1.5rem !important; }
+.u-mt-medium { margin-top: 4rem !important; }
+.u-mt-big { margin-top: 8rem !important; }
+.u-mt-huge { margin-top: 10rem !important; }
+
+.u-bg-grey { background-color: $color-grey-bg !important; }
+.u-bg-white { background-color: $color-white !important; }
+
+.u-outline-grey {
+    border: 1px solid $color-grey-line;
+}
+
+.u-max-width {
+    max-width: $max-width !important;
+    margin: 0 auto;
+
+    @include respond(tab-land) {
+        width: 80%;
+    }
+
+    @include respond(phone) {
+        width: 90%;
+    }
+}

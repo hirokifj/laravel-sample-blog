@@ -1,0 +1,205 @@
+@keyframes moveInLeft {
+	0% {
+		opacity: 0;
+		transform: translate(-20rem)
+
+	}
+
+	80% {
+		transform: translate(1rem);
+
+	}
+
+	100% {
+		opacity: 1;
+		transform: translate(0);
+	}
+}
+
+
+@keyframes moveInRight {
+	0% {
+		opacity: 0;
+		transform: translate(15rem)
+
+	}
+
+	80% {
+		transform: translate(-1rem);
+
+	}
+
+	100% {
+		opacity: 1;
+		transform: translate(0);
+	}
+}
+
+
+@keyframes moveInBottom {
+	0% {
+		opacity: 0;
+		transform: translateY(10rem)
+
+	}
+
+
+	100% {
+		opacity: 1;
+		transform: translate(0);
+	}
+}
+
+
+
+@keyframes stroke {
+
+	0% {
+		fill: transparent;
+		stroke-dashoffset: 4000;
+	}
+
+	10% {
+		fill: transparent;
+	}
+
+	80% {
+		fill: transparent;
+		stroke-dashoffset: 0;
+	}
+
+	100% {
+		fill: $color-secondary;
+	}
+}
+
+@keyframes strokeLine {
+
+	0% {
+		stroke-dashoffset: 4000;
+	}
+
+	100% {
+		stroke-dashoffset: 0;
+	}
+
+}
+
+
+
+
+@keyframes pulse {
+	0% {
+	//   transform: scale3d(1, 1, 1);
+		transform: translateY(0);
+	}
+	50%{
+	//   transform: scale3d(1.1, 1.1, 1.1);
+	transform: translateY(6px);
+
+	}
+	100% {
+	//   transform: scale3d(1, 1, 1);
+	transform: translateY(0);
+	}
+}
+
+
+@keyframes showFromRight {
+	0% {
+		// opacity: 0;
+		transform: translateX(100%);
+	}
+
+	100% {
+		// opacity: 1;
+		transform: translateX(0);
+	}	
+
+}
+
+
+@keyframes showFromBottom {
+	0% {
+		opacity: 0;
+		transform: translateY(100%);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}	
+
+}
+
+
+@keyframes showFromTop {
+	0% {
+		opacity: 0;
+		transform: translateY(-100%);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}	
+
+}
+
+
+@keyframes showScale {
+	0% {
+		opacity: .5;
+		transform: scale(.1);
+	}
+
+	50% {
+		transform: scale(1.1);		
+	}
+
+	100% {
+		opacity: 1;
+		transform: scale(1);		
+	}
+
+}
+
+@keyframes bounce {
+	0% {
+		top: -5%;
+	}
+
+	50% {
+		top: -20%;
+	}
+
+	100% {
+		top: -5%;
+	}
+}
+
+@keyframes bounceShort {
+	0% {
+		top: -2%;
+	}
+
+	50% {
+		top: -9%;
+	}
+
+	100% {
+		top: -2%;
+	}
+
+}
+
+@keyframes flashMsg {
+	0% {
+		opacity: 1;
+	}
+
+	100% {
+		opacity: 0;
+		visibility: hidden;
+	}
+}

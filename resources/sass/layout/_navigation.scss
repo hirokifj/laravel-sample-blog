@@ -1,0 +1,39 @@
+.main-nav {
+
+    &__list {
+        display: flex;
+        align-items: center;
+    }
+
+    &__item {
+
+        &:not(:last-of-type) {
+            margin-right: 4rem;
+
+            @include respond(phone) {
+                margin-right: 2rem;
+            }
+        }
+    }
+
+    &__link {
+        font-size: 1.4rem;
+        letter-spacing: 1px;
+        font-weight: bold;
+        text-decoration: none;
+        color: $color-grey-dark-3;
+        border-bottom: 2px solid transparent;
+        cursor: pointer;
+
+        transition: .2s all;
+
+        &:hover {
+            color: $color-primary;
+            border-bottom: 2px solid $color-primary;
+        }
+
+        @include respond(phone) {
+            font-size: 1.6rem;
+        }
+    }
+}

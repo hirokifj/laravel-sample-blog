@@ -1,0 +1,53 @@
+.hero-box {
+    min-height: 40rem;
+    background-image: linear-gradient(rgba($color-black,.4), rgba($color-black,.4)), url(/../img/hero.jpg);
+    background-size: cover;
+    background-position: center;
+
+    position: relative;
+
+    @include respond(phone) {
+        min-height: 25rem;
+    }
+
+    &__text {
+        @include absCenter;
+
+        width: 70%;
+    }
+
+    &__btn {
+        display: flex;
+        text-align: center;
+        justify-content: center;
+
+        @include respond(phone) {
+            display: block;
+        }
+
+        & .btn {
+
+            &:not(:last-child) {
+                margin-right: 2rem;
+
+                @include respond(phone) {
+                    margin-right: 0;
+                    margin-bottom: 1.5rem;
+                }
+            }
+        }
+
+
+
+    }
+}
+
+.hero-copy {
+    font-size: 3.2rem;
+    color: $color-white;
+    letter-spacing: 1px;
+
+    @include respond(phone) {
+        font-size: 2.6rem;
+    }
+}

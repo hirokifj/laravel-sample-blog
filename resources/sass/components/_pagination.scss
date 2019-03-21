@@ -1,0 +1,63 @@
+.pagination {
+
+    display: inline-block;
+
+    &__list {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    &__item {
+        width: 3.5rem;
+        height: 3.5rem;
+        font-size: 1.5rem;
+
+        //上下中央寄せ
+        text-align: center;
+        line-height: 3.5rem;
+
+        margin-bottom: 1.5rem;
+
+        &:not(:last-child) {
+            margin-right: 1.3rem;
+
+            @include respond(phone) {
+                margin-right: 1.5rem;
+            }
+
+
+        }
+
+        &--dots {
+            border-radius: 50%;
+            border: 1px solid $color-grey-light-2;
+            color: $color-grey-light-2;
+        }
+
+    }
+
+    &__link {
+        display: block;
+        width: 100%;
+        height: 100%;
+
+        text-decoration: none;
+        color: $color-primary;
+
+        border-radius: 50%;
+        border: 1px solid $color-primary;
+
+        &:hover {
+            background-color: $color-primary;
+            color: $color-white;
+        }
+
+    }
+
+}
+
+
+.page-active {
+    background-color: $color-primary;
+    color: $color-white;
+}

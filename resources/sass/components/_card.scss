@@ -1,0 +1,122 @@
+.card {
+
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+
+    @include respond(tab-port) {
+        justify-content: space-between;
+    }
+
+    @include respond(phone) {
+        display: block;
+    }
+
+    &__link {
+        min-height: 25rem;
+        box-sizing: border-box;
+        border-radius: 5px;
+        border: 1px solid $color-grey-line;
+        padding: 1.5rem 2rem;
+
+        display: block;
+
+        &:link,
+        &:visited {
+            text-decoration: none;
+            color: $color-grey-dark-3;
+        }
+
+        @include respond(phone) {
+            height: auto;
+            padding: 1.8rem 2.2rem;
+        }
+    }
+
+    //３カラムのサイズ指定
+    &--3cl {
+
+        & .card__item {
+            width: calc(33.33333333% - 2rem);  //marginを取りたい分を引いておく。
+            margin-bottom: 3rem;
+
+            @include respond(tab-port) {
+                width: 46%;
+            }
+
+            @include respond(phone) {
+                width: 100%;
+                margin-bottom: 4rem;
+            }
+
+            &:not(:nth-child(3n)) {
+                margin-right: 3rem; //行の終端（3つ目）以外にmarginを設定（余った分を割り振って30px取る）
+
+                @include respond(tab-port) {
+                    margin-right: 0;
+                }
+            }
+
+        }
+    }
+
+    //２カラムのサイズ指定
+    &--2cl {
+
+        & .card__item {
+            width: calc(50% - 2rem);  //marginを取りたい分を引いておく。
+            margin-bottom: 4rem;
+
+            &:not(:nth-child(2n)) {
+                margin-right: 4rem; //行の終端（3つ目）以外にmarginを設定（余った分を割り振って30px取る）
+            }
+
+        }
+    }
+
+
+    &__heading {
+        margin-bottom: 1rem;
+
+    }
+
+    &__body {
+        height: 8rem;
+        color: $color-grey-dark-1;
+        font-size: 1.4rem;
+
+        @include respond(phone) {
+            height: auto;
+        }
+
+    }
+
+    &-title {
+        display: block;
+        height: 5rem;
+        font-size: 1.6rem;
+        line-height: 1.4;
+        color: $color-secondary-light;
+        font-weight: bold;
+    }
+
+    &-img {
+        width: 100%;
+        height: 12rem;
+
+        border-radius: 3px;
+        overflow: hidden;
+
+        & img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            vertical-align: bottom;
+        }
+    }
+
+    &-date {
+        color: $color-secondary-light;
+    }
+
+}

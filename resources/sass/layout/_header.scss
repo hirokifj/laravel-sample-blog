@@ -1,0 +1,38 @@
+.header {
+
+    border-bottom: 1px solid $color-grey-line;
+
+    &-container {
+        min-height: 6rem;
+        max-width: $max-width;
+        margin: 0 auto;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        @include respond(tab-land) {
+            width: 80%;
+        }
+
+        @include respond(phone) {
+            width: 90%;
+        }
+    }
+
+    &-logo {
+        font-size: 2.4rem;
+
+        &__link {
+            text-decoration: none;
+            color: currentColor;
+            transition: all .2s;
+
+            &:hover {
+                color: $color-primary;
+
+            }
+        }
+    }
+
+}

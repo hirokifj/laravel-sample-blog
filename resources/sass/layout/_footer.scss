@@ -1,0 +1,39 @@
+.footer {
+    padding-top: 6rem;
+    padding-bottom: 4rem;
+    border-top: 1px solid $color-grey-line;
+
+    &-container {
+        max-width: $max-width;
+        margin: 0 auto;
+        margin-bottom: 8rem;
+
+        @include respond(tab-land) {
+            width: 80%;
+        }
+
+        @include respond(phone) {
+            width: 90%;
+        }
+    }
+
+    &-logo {
+        font-size: 2.4rem;
+
+        &__link {
+            text-decoration: none;
+            color: currentColor;
+            transition: all .2s;
+
+            &:hover {
+                color: $color-primary;
+
+            }
+        }
+    }
+}
+
+.copy-right {
+    font-size: 12px;
+    text-align: center;
+}

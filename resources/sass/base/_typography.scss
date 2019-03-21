@@ -1,0 +1,42 @@
+body {
+    font-size: $default-font-size;
+    font-family: "Open Sans", "Myriad", Helvetica, Arial, "Noto Sans JP", sans-serif;
+    font-weight: 400;
+    line-height: 1.8;
+    color: $color-grey-dark-3;
+}
+
+.page-title {
+    font-size: 2.4rem;
+    letter-spacing: 2px;
+    color: $color-secondary;
+    font-weight: bold;
+}
+
+.section-title {
+    font-size: 1.8rem;
+    letter-spacing: 1px;
+    color: $color-grey-dark-1;
+}
+
+.link-text {
+    font-size: inherit;
+
+    &:link,
+    &:visited {
+        color: $color-grey-dark-1;
+    }
+
+
+    &--primary {
+
+        &:link,
+        &:visited {
+            color: $color-primary;
+        }
+
+        &:hover {
+            color: $color-primary-light;
+        }
+    }
+}
