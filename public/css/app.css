@@ -1184,7 +1184,7 @@ body {
 .header-logo__link {
   text-decoration: none;
   color: currentColor;
-  transition: all 0.2s;
+  transition: color 0.2s;
 }
 .header-logo__link:hover {
   color: #ff5851;
@@ -1212,7 +1212,7 @@ body {
   color: #333;
   border-bottom: 2px solid transparent;
   cursor: pointer;
-  transition: 0.2s all;
+  transition: color 0.2s, border-bottom 0.2s;
 }
 .main-nav__link:hover {
   color: #ff5851;
