@@ -1,0 +1,30 @@
+.comment {
+    padding: 2rem 0;
+    border-bottom: 1px solid $color-grey-line;
+
+    margin-bottom: 2rem;
+
+    &__heading {
+        display: block;
+        margin-bottom: 1.5rem;
+    }
+
+    &-user {
+        display: block;
+        font-weight: bold;
+    }
+
+    &-date {
+        color: $color-secondary-light;
+    }
+}
+
+
+.comment-form {
+    width: 80%;
+
+    @include respond(phone) {
+        width: 100%;
+    }
+}
+
