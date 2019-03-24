@@ -18,6 +18,11 @@ class Post extends Model
         return $this->belongsTo(PostCategory::class);
     }
 
+    public function comments()
+    {
+        return $this->hasMany(PostComment::class);
+    }
+
     /**
      * カテゴリーでの絞り込み
      *
@@ -66,4 +71,14 @@ class Post extends Model
         }
     }
 
+    /**
+     * コメントを新規追加
+     *
+     * @param array $comment POSTされたパラメータ
+     * @return void
+     */
+    public function addComment($comment)
+    {
+        $this->comments()->create($comment);
+    }
 }

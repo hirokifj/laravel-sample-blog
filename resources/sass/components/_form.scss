@@ -164,6 +164,10 @@
         }
     }
 
+    &__textarea {
+        resize: none;
+    }
+
     &__select {
         -webkit-appearance: none;
         -moz-appearance: none;
