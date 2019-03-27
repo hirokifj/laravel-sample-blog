@@ -29,6 +29,7 @@ TOP
                                 <span class="card-title">{{ str_limit($post->title, 50, '...') }}</span>
                                 <div class="card-img">
                                     <img src="{{ $post->thumbnail_img ? asset(config('post-img.thumbnail_dir') . $post->thumbnail_img) : asset(config('post-img.dummy_file_path')) }}" alt="{{ $post->title }}">
+                                    <span class="card-category">{{ $post->category->name }}</span>
                                 </div>
                             </div>
                             <div class="card__body">

@@ -14,7 +14,7 @@
         @endif
         <section class="section-info u-mb-medium">
             <div class="post-info u-mb-small">
-                <a class="category-badge" href="#">{{ $post->category->name }}</a>
+                <span class="category-badge">{{ $post->category->name }}</span>
                 @can('edit', $post)
                     <div class="edit-link">
                         <a href="{{ route('posts.edit', ['post' => $post->id]) }}" class="link-text">編集する</a>
