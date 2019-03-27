@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use App\PostCategory;
+use App\PostTag;
 use Illuminate\Http\Request;
 
 class PostsController extends Controller
@@ -41,8 +42,10 @@ class PostsController extends Controller
     {
         // カテゴリーの一覧を取得する（入力フォームに表示するため）
         $categoriesList = PostCategory::all();
+        // タグの一覧を取得する（入力フォームに表示するため）
+        $tagsList = PostTag::all();
 
-        return view('posts.create', compact('categoriesList'));
+        return view('posts.create', compact('categoriesList', 'tagsList'));
     }
 
     /**
@@ -55,6 +58,7 @@ class PostsController extends Controller
     {
         //バリデーション
         $attributes = $this->validatePost();
+        $tags = $this->validateTags();
 
         //ユーザーIDを追加
         $attributes['owner_id'] = auth()->id();
@@ -68,7 +72,8 @@ class PostsController extends Controller
         }
 
         //保存処理
-        Post::create($attributes);
+        $createdPost = Post::create($attributes);
+        $createdPost->tags()->attach($tags['tags']);
 
         return redirect('/home')->with('status', '投稿が完了しました。');
     }
@@ -97,8 +102,10 @@ class PostsController extends Controller
 
         // カテゴリーの一覧を取得する（入力フォームに表示するため）
         $categoriesList = PostCategory::all();
+        // タグの一覧を取得する（入力フォームに表示するため）
+        $tagsList = PostTag::all();
 
-        return view('posts.edit', compact('post', 'categoriesList'));
+        return view('posts.edit', compact('post', 'categoriesList', 'tagsList'));
     }
 
     /**
@@ -114,6 +121,7 @@ class PostsController extends Controller
 
         //バリデーション処理
         $attributes = $this->validatePost();
+        $tags = $this->validateTags();
 
         //サムネイル画像のアップロード処理
         if(request()->hasFile('thumbnail_img')){
@@ -125,6 +133,7 @@ class PostsController extends Controller
 
         //保存処理
         $post->update($attributes);
+        $post->tags()->sync($tags['tags']);
 
         return redirect('/home')->with('status', '更新されました。');
     }
@@ -158,6 +167,18 @@ class PostsController extends Controller
             'category_id' => ['required', 'exists:post_categories,id'],
             'body' => ['required'],
             'thumbnail_img' => ['file', 'image', 'mimes:jpeg,png', 'max:2048']
+        ]);
+    }
+
+    /**
+     * タグのバリデーションメソッド
+     *
+     * @return array
+     */
+    protected function validateTags()
+    {
+        return request()->validate([
+            'tags' => ['array', 'exists:post_tags,id']
         ]);
     }
 

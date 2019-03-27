@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Post extends Model
 {
@@ -21,6 +22,11 @@ class Post extends Model
     public function comments()
     {
         return $this->hasMany(PostComment::class);
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(PostTag::class);
     }
 
     /**
@@ -80,5 +86,19 @@ class Post extends Model
     public function addComment($comment)
     {
         $this->comments()->create($comment);
+    }
+
+    /**
+     * 記事が当該のタグを保持しているかどうか
+     *
+     * @param int $tagId タグのID
+     * @return boolean
+     */
+    public function hasTag($tagId)
+    {
+        return DB::table('post_post_tag')->where([
+            'post_id' => $this->id,
+            'post_tag_id' => $tagId
+        ])->exists();
     }
 }

@@ -1,5 +1,6 @@
 <?php
 use App\Post;
+use App\PostTag;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,12 +16,17 @@ use App\Post;
 Route::get('/', function () {
 
     $posts = Post::latest()->limit(9)->get();
+    $tags = PostTag::has('posts')->get();
 
-    return view('welcome', ['posts' => $posts]);
+    return view('welcome', compact('posts', 'tags'));
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
 Route::resource('posts', 'PostsController');
+
 Route::post('/posts/{post}/comments', 'PostCommentsController@store')->name('comments.store');
+
+Route::get('/tags/{tag}', 'PostTagsController@list')->name('tags.list');

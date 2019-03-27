@@ -17,7 +17,7 @@ TOP
 </div>
 <div class="container-single u-max-width">
     <main class="main">
-        <section class="section-item-list">
+        <section class="section-item-list u-mb-big">
             <div class="section-title u-mb-medium">
                 <h2>ユーザーの新着記事</h2>
             </div>
@@ -42,6 +42,16 @@ TOP
             <div class="u-center-text">
                 <a class="btn btn--primary btn--small" href="{{ route('posts.index') }}">ユーザーの記事を探す</a>
             </div>
+        </section>
+        <section class="section-tag-list">
+            <div class="section-title u-mb-small">
+                <h2>タグ</h2>
+            </div>
+            <ul class="tag-list">
+                @foreach($tags as $tag)
+                    <li class="tag-list__item"><a href="{{ route('tags.list', ['tag' => $tag->id]) }}" class="tag-list__link">#{{ $tag->name }}</a></li>
+                @endforeach
+            </ul>
         </section>
     </main>
 </div>
