@@ -592,10 +592,18 @@ body {
   border: 1px solid #e9eef1;
   padding: 1.5rem 2rem;
   display: block;
+  transition: background-color 0.2s;
 }
 .card__link:link, .card__link:visited {
   text-decoration: none;
   color: #333;
+}
+.card__link:hover, .card__link:active {
+  background-color: #e9eef1;
+}
+.card__link:hover img, .card__link:active img {
+  -webkit-transform: scale(1.15);
+  transform: scale(1.15);
 }
 @media only screen and (max-width: 37.5em) {
   .card__link {
@@ -659,6 +667,7 @@ body {
   height: 12rem;
   border-radius: 3px;
   overflow: hidden;
+  position: relative;
 }
 .card-img img {
   width: 100%;
@@ -666,6 +675,20 @@ body {
   -o-object-fit: cover;
   object-fit: cover;
   vertical-align: bottom;
+  transition: -webkit-transform 0.4s;
+  transition: transform 0.4s;
+  transition: transform 0.4s, -webkit-transform 0.4s;
+}
+.card-category {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #fff;
+  background-color: #ff5851;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+  padding: 0.5rem 0.7rem;
+  box-sizing: border-box;
 }
 .card-date {
   color: #485f81;
@@ -1353,10 +1376,6 @@ body {
   letter-spacing: 1px;
   text-align: center;
   text-decoration: none;
-  transition: all 0.2s;
-}
-.category-badge:hover {
-  background-color: #ff372f;
 }
 
 .section-description {

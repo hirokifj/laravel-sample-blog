@@ -1,6 +1,6 @@
 @extends('layouts.base')
 
-@section('title')投稿@endsection
+@section('title')記事編集@endsection
 
 @section('content')
 <div class="container-single u-bg-grey">

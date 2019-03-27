@@ -1,7 +1,7 @@
 <header class="header">
     <div class="header-container">
         <div class="header-logo">
-            <h1 class="header-logo__text"><a class="header-logo__link" href="{{ url('/') }}">{{ config('app.name', 'Sample Media') }}</a></h1>
+            <a class="header-logo__link" href="{{ url('/') }}">{{ config('app.name', 'Sample Media') }}</a>
         </div>
         <nav class="main-nav">
             <ul class="main-nav__list">

@@ -1,6 +1,6 @@
 @extends('layouts.base')
 
-@section('title')投稿@endsection
+@section('title')記事投稿@endsection
 
 @section('content')
 <div class="container-single u-bg-grey">
@@ -10,7 +10,7 @@
 
                 @csrf
                 <div class="form__title">
-                    <h1>投稿</h1>
+                    <h1>新規投稿</h1>
                 </div>
 
                 @include('errors')

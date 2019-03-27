@@ -42,13 +42,7 @@
     font-size: 12px;
     letter-spacing: 1px;
     text-align: center;
-
     text-decoration: none;
-    transition: all .2s;
-
-    &:hover {
-        background-color: $color-primary-dark;
-    }
 }
 
 .section-description {
