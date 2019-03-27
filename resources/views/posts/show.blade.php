@@ -34,11 +34,22 @@
                 <span>投稿ユーザー：</span>
                 <span class="author-name">{{ $post->owner->name }}</span>
             </div>
-
         </section>
-        <section class="section-description">
+        <section class="section-description u-mb-big">
             <p>{!! nl2br(e($post->body)) !!}</p>
         </section>
+        @if($post->tags->count())
+            <section class="section-tag">
+                <div class="section-title u-mb-small">
+                    <h2>タグ</h2>
+                </div>
+                <ul class="tag-list">
+                    @foreach($post->tags as $tag)
+                        <li class="tag-list__item"><a href="{{ route('tags.list', ['tag' => $tag->id]) }}" class="tag-list__link">#{{ $tag->name }}</a></li>
+                    @endforeach
+                </ul>
+            </section>
+        @endif
     </article>
     @include('posts.comment')
 </div>

@@ -122,7 +122,8 @@ return [
         'title' => '記事タイトル',
         'category_id' => 'カテゴリー',
         'thumbnail_img' => 'サムネイル画像',
-        'body' => '本文'
+        'body' => '本文',
+        'tags' => 'タグ'
     ],
 
 ];

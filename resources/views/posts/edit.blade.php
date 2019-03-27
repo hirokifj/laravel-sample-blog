@@ -49,6 +49,19 @@
                     </label>
                     <textarea class="form__textarea{{ $errors->has('body') ? ' form__input-error' : '' }}" name="body" id="body" rows="15">{{ $post->body }}</textarea>
                 </div>
+                <div class="form__group">
+                    <span class="form__label">
+                        <span class="label-text">関連タグ</span>
+                    </span>
+                    <div class="form-check-wrap">
+                        @foreach($tagsList as $tag)
+                            <div class="form__check-group">
+                                <input class="field form__checkbox" id="tag-{{ $tag->id }}" name="tags[]" type="checkbox" value="{{ $tag->id }}"{{ ($post->hasTag($tag->id)) ? ' checked' : '' }}>
+                                <label class="form__label-checkbox" for="tag-{{ $tag->id }}">{{ $tag->name }}</label>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
                 <div class="form__btn u-center-text">
                     <button class="btn btn--primary btn--big" type="submit">記事を更新する</button>
                 </div>
