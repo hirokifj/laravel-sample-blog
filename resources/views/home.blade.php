@@ -67,7 +67,7 @@
                                         </div>
                                         <div class="media__body">
                                             <div class="media__heading">
-                                                <span class="media-title">{{ str_limit($userPost->title, 60, '...') }}</span>
+                                                <h3 class="media-title">{{ str_limit($userPost->title, 60, '...') }}</h3>
                                             </div>
                                             <div class="media__description">
                                                 <span class="media-date">{{ $userPost->created_at }}</span>

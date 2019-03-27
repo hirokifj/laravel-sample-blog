@@ -56,7 +56,7 @@
                         <div class="card__item">
                             <a class="card__link" href="{{ route('posts.show', ['post' => $post->id]) }}">
                                 <div class="card__heading">
-                                    <span class="card-title">{{ str_limit($post->title, 50, '...') }}</span>
+                                    <h2 class="card-title">{{ str_limit($post->title, 50, '...') }}</h2>
                                     <div class="card-img">
                                         <img src="{{ $post->thumbnail_img ? asset(config('post-img.thumbnail_dir') . $post->thumbnail_img) : asset(config('post-img.dummy_file_path')) }}" alt="{{ $post->title }}">
                                         <span class="card-category">{{ $post->category->name }}</span>

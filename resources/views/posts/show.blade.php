@@ -1,6 +1,6 @@
 @extends('layouts.base')
 
-@section('title')詳細@endsection
+@section('title'){{ $post->title }}@endsection
 
 @section('content')
 @include('flash_msg')

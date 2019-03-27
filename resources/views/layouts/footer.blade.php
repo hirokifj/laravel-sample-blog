@@ -1,7 +1,7 @@
 <footer class="footer">
     <div class="footer-container">
          <div class="footer-logo">
-            <h1 class="footer-logo__text"><a class="footer-logo__link" href="{{ url('/') }}">{{ config('app.name', 'Sample Media') }}</a></h1>
+            <a class="footer-logo__link" href="{{ url('/') }}">{{ config('app.name', 'Sample Media') }}</a>
         </div>
     </div>
     <div class="copy-right">
