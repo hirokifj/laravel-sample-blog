@@ -9,6 +9,10 @@ class Post extends Model
 {
     protected $guarded = ['id'];
 
+    protected $attributes = [
+        'thumbnail_img' => ''
+    ];
+
     public function owner()
     {
         return $this->belongsTo(User::class);

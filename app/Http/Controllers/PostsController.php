@@ -6,6 +6,7 @@ use App\Post;
 use App\PostCategory;
 use App\PostTag;
 use Illuminate\Http\Request;
+use App\Http\Requests\PostRequest;
 
 class PostsController extends Controller
 {
@@ -21,7 +22,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        //記事一覧を取得（GETパラメータに応じて絞り込み）
+        // 記事一覧を取得（GETパラメータに応じて絞り込み）
         $posts = Post::with('category')
             ->searchCat(request('cat_id'))
             ->searchTitle(request('title'))
@@ -52,35 +53,28 @@ class PostsController extends Controller
     /**
      * 新規記事の保存
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Http\Requests\PostRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
-        //バリデーション
-        $attributes = $this->validatePost();
-        $tags = $this->validateTags();
-
-        //ユーザーIDを追加
+        // 記事に関するリクエスト値のみを格納
+        $attributes = $request->except('tags');
+        // ユーザーIDを追加
         $attributes['owner_id'] = auth()->id();
 
-        //サムネイル画像のアップロード処理
-        if(request()->hasFile('thumbnail_img')) {
-            $attributes['thumbnail_img'] = $this->uploadThumbnail();
-        } else {
-            //画像が送信されていない場合は、空で登録する。
-            $attributes['thumbnail_img'] = '';
-        }
+        // サムネイル画像のアップロード処理
+        $this->uploadThumbnailIfNeeded($request, $attributes);
 
-        //保存処理
-        $createdPost = Post::create($attributes);
-        $createdPost->tags()->attach($tags['tags']);
+        // 保存処理
+        Post::create($attributes)
+            ->tags()->attach($request->tags);
 
         return redirect('/home')->with('status', '投稿が完了しました。');
     }
 
     /**
-     * 投稿の詳細画面を表示
+     * 記事の詳細画面を表示
      *
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
@@ -98,7 +92,7 @@ class PostsController extends Controller
      */
     public function edit(Post $post)
     {
-        //ユーザーの編集可否権限をチェック
+        // ユーザーの編集可否権限をチェック
         $this->authorize('edit', $post);
 
         // カテゴリーの一覧を取得する（入力フォームに表示するため）
@@ -112,42 +106,37 @@ class PostsController extends Controller
     /**
      * 記事の更新
      *
+     * @param  App\Http\Requests\PostRequest  $request
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Post $post)
+    public function update(PostRequest $request, Post $post)
     {
-        //ユーザーの編集可否権限をチェック
+        // ユーザーの編集可否権限をチェック
         $this->authorize('edit', $post);
 
-        //バリデーション処理
-        $attributes = $this->validatePost();
-        $tags = $this->validateTags();
+        // 記事に関するリクエスト値のみを格納
+        $attributes = $request->except('tags');
 
-        //サムネイル画像のアップロード処理
-        if(request()->hasFile('thumbnail_img')){
-            $attributes['thumbnail_img'] = $this->uploadThumbnail();
-        } else {
-            //画像が送信されていない場合は、DBの値をそのまま登録する。
-            $attributes['thumbnail_img'] = $post->thumbnail_img;
-        }
+        // サムネイル画像のアップロード処理
+        $this->uploadThumbnailIfNeeded($request, $attributes);
 
-        //保存処理
+        // 保存処理
         $post->update($attributes);
-        $post->tags()->sync($tags['tags']);
+        $post->tags()->sync($request->tags);
 
         return redirect('/home')->with('status', '更新されました。');
     }
 
     /**
-     * 投稿を削除
+     * 記事を削除
      *
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
     public function destroy(Post $post)
     {
-        //ユーザーの編集可否権限をチェック
+        // ユーザーの編集可否権限をチェック
         $this->authorize('edit', $post);
 
         $post->delete();
@@ -155,47 +144,29 @@ class PostsController extends Controller
         return redirect('/home')->with('alert', '投稿を削除しました。');
     }
 
-
-    /**
-     * 投稿記事用のバリデーションメソッド
-     *
-     * @return array
-     */
-    protected function validatePost()
-    {
-        return request()->validate([
-            'title' => ['required', 'max:255'],
-            'category_id' => ['required', 'exists:post_categories,id'],
-            'body' => ['required'],
-            'thumbnail_img' => ['file', 'image', 'mimes:jpeg,png', 'max:2048']
-        ]);
-    }
-
-    /**
-     * タグのバリデーションメソッド
-     *
-     * @return array
-     */
-    protected function validateTags()
-    {
-        return request()->validate([
-            'tags' => ['array', 'exists:post_tags,id']
-        ]);
-    }
-
     /**
      * サムネイル画像のアップロード処理
      *
-     * @return string アップロード先のファイル名
+     * サムネイル画像のファイルが送信されていれば、アップロード処理を行い、
+     * $attributesに、アップロード後のファイル名を格納する。
+     * 送信されていない場合は、何もしない。
+     *
+     * @param array  $request
+     * @param array  $attributes postsテーブルに保存するデータ（値渡し）
+     * @return void
      */
-    protected function uploadThumbnail()
+    protected function uploadThumbnailIfNeeded($request, &$attributes)
     {
-        //送信された画像をアップロードする
-        $FilePath = request()->file('thumbnail_img')->store(config('post-img.thumbnail_upload_dir'));
+        $thumbnailKeyName = 'thumbnail_img';
 
-        //画像のファイル名を取得
-        $FileName = basename($FilePath);
+        if(!$request->hasFile($thumbnailKeyName)) {
+            return;
+        }
 
-        return $FileName;
+        // 送信された画像をアップロードする
+        $FilePath = $request->file($thumbnailKeyName)->store(config('post-img.thumbnail_upload_dir'));
+
+        // 画像のファイル名を格納
+        $attributes[$thumbnailKeyName] = basename($FilePath);
     }
 }
