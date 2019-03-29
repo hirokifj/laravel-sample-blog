@@ -16,7 +16,7 @@ class PostTagsController extends Controller
     public function list(PostTag $tag)
     {
         //タグに紐づいた投稿を取得
-        $posts = $tag->posts()->paginate(9);
+        $posts = $tag->posts()->with('category')->paginate(9);
 
         return view('tags.list', compact('tag', 'posts'));
     }

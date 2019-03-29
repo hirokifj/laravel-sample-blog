@@ -22,7 +22,8 @@ class PostsController extends Controller
     public function index()
     {
         //記事一覧を取得（GETパラメータに応じて絞り込み）
-        $posts = Post::searchCat(request('cat_id'))
+        $posts = Post::with('category')
+            ->searchCat(request('cat_id'))
             ->searchTitle(request('title'))
             ->sortDate(request('sort_date'))
             ->paginate(9);

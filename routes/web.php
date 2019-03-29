@@ -15,7 +15,7 @@ use App\PostTag;
 
 Route::get('/', function () {
 
-    $posts = Post::latest()->limit(9)->get();
+    $posts = Post::with('category')->latest()->limit(9)->get();
     $tags = PostTag::has('posts')->get();
 
     return view('welcome', compact('posts', 'tags'));
