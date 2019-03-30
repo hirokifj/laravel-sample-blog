@@ -152,7 +152,7 @@ class PostsController extends Controller
      * 送信されていない場合は、何もしない。
      *
      * @param array  $request
-     * @param array  $attributes postsテーブルに保存するデータ（値渡し）
+     * @param array  $attributes postsテーブルに保存するデータ（参照渡し）
      * @return void
      */
     protected function uploadThumbnailIfNeeded($request, &$attributes)
