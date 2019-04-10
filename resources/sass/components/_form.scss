@@ -9,8 +9,8 @@
             margin: 0 auto;
             padding: 4rem 6rem;
 
-            @include respond(tab-land) {
-                width: 80%;
+            @include respond(tab-port) {
+                width: 65%;
             }
 
             @include respond(phone) {
@@ -143,6 +143,9 @@
         text-align: center;
         vertical-align: middle;
 
+        @include respond(phone) {
+            width: 4.5rem;
+        }
     }
 
     &__input,
@@ -249,8 +252,6 @@
 
 //検索ボックスの調整
 .form--search {
-
-
 
     & .form__group {
 

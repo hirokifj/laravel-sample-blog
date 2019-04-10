@@ -755,9 +755,9 @@ body {
   margin: 0 auto;
   padding: 4rem 6rem;
 }
-@media only screen and (max-width: 75em) {
+@media only screen and (max-width: 56.25em) {
   .form-container--medium {
-    width: 80%;
+    width: 65%;
   }
 }
 @media only screen and (max-width: 37.5em) {
@@ -864,6 +864,11 @@ body {
   letter-spacing: 1px;
   text-align: center;
   vertical-align: middle;
+}
+@media only screen and (max-width: 37.5em) {
+  .form__required-badge {
+    width: 4.5rem;
+  }
 }
 .form__input, .form__select, .form__textarea {
   width: 100%;
