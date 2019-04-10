@@ -960,16 +960,17 @@ body {
   }
 }
 .form--search .form__label .label-text {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
 }
 .form--search .form__input, .form--search .form__select {
   width: 100%;
-  padding: 1.5rem 2rem;
   box-sizing: border-box;
-  font-size: 1.2rem;
+  font-size: 1.6rem;
+}
+.form--search .form__input {
+  padding: 1.5rem 2rem;
 }
 .form--search .form__select {
-  font-size: 1.2rem;
   padding: 1.3rem 2rem;
   color: #333;
 }
