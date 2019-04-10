@@ -9,8 +9,8 @@
             margin: 0 auto;
             padding: 4rem 6rem;
 
-            @include respond(tab-land) {
-                width: 80%;
+            @include respond(tab-port) {
+                width: 65%;
             }
 
             @include respond(phone) {
@@ -143,6 +143,9 @@
         text-align: center;
         vertical-align: middle;
 
+        @include respond(phone) {
+            width: 4.5rem;
+        }
     }
 
     &__input,
@@ -250,8 +253,6 @@
 //検索ボックスの調整
 .form--search {
 
-
-
     & .form__group {
 
         &:not(:last-child) {
@@ -279,24 +280,24 @@
     & .form__label {
 
         & .label-text {
-            font-size: 1.4rem;
+            font-size: 1.6rem;
         }
     }
 
     & .form__input,
     & .form__select {
         width: 100%;
-        padding: 1.5rem 2rem;
         box-sizing: border-box;
-        font-size: 1.2rem;
+        font-size: 1.6rem;
+    }
 
+    & .form__input {
+        padding: 1.5rem 2rem;
     }
 
     & .form__select {
-        font-size: 1.2rem;
         padding: 1.3rem 2rem;
         color: $color-grey-dark-3;
-
     }
 }
 
@@ -331,7 +332,6 @@
         }
 
     }
-
 
     &--active {
 

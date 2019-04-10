@@ -507,7 +507,7 @@ body {
 
 .btn {
   display: inline-block;
-  padding: 1rem 2rem;
+  padding: 1.5rem 2rem;
   border-radius: 5px;
   border: none;
   letter-spacing: 2px;
@@ -755,9 +755,9 @@ body {
   margin: 0 auto;
   padding: 4rem 6rem;
 }
-@media only screen and (max-width: 75em) {
+@media only screen and (max-width: 56.25em) {
   .form-container--medium {
-    width: 80%;
+    width: 65%;
   }
 }
 @media only screen and (max-width: 37.5em) {
@@ -865,6 +865,11 @@ body {
   text-align: center;
   vertical-align: middle;
 }
+@media only screen and (max-width: 37.5em) {
+  .form__required-badge {
+    width: 4.5rem;
+  }
+}
 .form__input, .form__select, .form__textarea {
   width: 100%;
   padding: 2rem 3rem;
@@ -955,16 +960,17 @@ body {
   }
 }
 .form--search .form__label .label-text {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
 }
 .form--search .form__input, .form--search .form__select {
   width: 100%;
-  padding: 1.5rem 2rem;
   box-sizing: border-box;
-  font-size: 1.2rem;
+  font-size: 1.6rem;
+}
+.form--search .form__input {
+  padding: 1.5rem 2rem;
 }
 .form--search .form__select {
-  font-size: 1.2rem;
   padding: 1.3rem 2rem;
   color: #333;
 }
