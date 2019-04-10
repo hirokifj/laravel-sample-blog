@@ -58,15 +58,13 @@ class PostsController extends Controller
      */
     public function store(PostRequest $request)
     {
-        // 記事に関するリクエスト値のみを格納
-        $attributes = $request->except('tags');
-        // ユーザーIDを追加
+        $attributes = $request->postAttr();
+
+        // ユーザーIDを格納
         $attributes['owner_id'] = auth()->id();
 
-        // サムネイル画像のアップロード処理
         $this->uploadThumbnailIfNeeded($request, $attributes);
 
-        // 保存処理
         Post::create($attributes)
             ->tags()->attach($request->tags);
 
@@ -92,7 +90,6 @@ class PostsController extends Controller
      */
     public function edit(Post $post)
     {
-        // ユーザーの編集可否権限をチェック
         $this->authorize('edit', $post);
 
         // カテゴリーの一覧を取得する（入力フォームに表示するため）
@@ -112,16 +109,12 @@ class PostsController extends Controller
      */
     public function update(PostRequest $request, Post $post)
     {
-        // ユーザーの編集可否権限をチェック
         $this->authorize('edit', $post);
 
-        // 記事に関するリクエスト値のみを格納
-        $attributes = $request->except('tags');
+        $attributes = $request->postAttr();
 
-        // サムネイル画像のアップロード処理
         $this->uploadThumbnailIfNeeded($request, $attributes);
 
-        // 保存処理
         $post->update($attributes);
         $post->tags()->sync($request->tags);
 
@@ -136,7 +129,6 @@ class PostsController extends Controller
      */
     public function destroy(Post $post)
     {
-        // ユーザーの編集可否権限をチェック
         $this->authorize('edit', $post);
 
         $post->delete();
