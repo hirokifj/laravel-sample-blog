@@ -10,7 +10,7 @@
                     </div>
                 </div>
                 <div class="card__body">
-                    <span class="card-date">{{ $post->created_at }}</span>
+                    <span class="card-date">{{ $post->created_at->format('Y/m/d') }}</span>
                     <p>{{ str_limit($post->body, 60, '...') }}</p>
                 </div>
             </a>
