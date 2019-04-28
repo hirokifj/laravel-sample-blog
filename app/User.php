@@ -44,18 +44,18 @@ class User extends Authenticatable
     }
 
     /**
-     * 投稿の所有者であるかを確認
+     * 投稿の所有者であればtrueを返す
      *
      * @param  \App\Post  $post
      * @return boolean
      */
-    public function ownsPost(Post $post)
+    protected function isOwner(Post $post)
     {
         return $this->id === $post->owner_id;
     }
 
     /**
-     * 投稿を編集可能であるかを確認
+     * 投稿を編集可能であればtrueを返す
      *
      * @param  \App\Post  $post
      * @return boolean
@@ -63,7 +63,7 @@ class User extends Authenticatable
     public function canEditPost(Post $post)
     {
         //投稿者自身であれば編集可能とする
-        return $this->ownsPost($post);
+        return $this->isOwner($post);
     }
 
     /**
