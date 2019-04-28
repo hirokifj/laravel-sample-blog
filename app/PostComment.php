@@ -28,8 +28,18 @@ class PostComment extends Model
      *
      * @return boolean
      */
-    public function isOwnerExists() {
+    protected function isOwnerExists() {
 
         return DB::table('users')->where('id', $this->owner_id)->exists();
+    }
+
+    /**
+     * コメンしたユーザーの、ユーザー名もしくはデフォルト値を返す
+     *
+     * @return string
+     */
+    public function ownerNameOrDefault() {
+
+        return $this->isOwnerExists() ? $this->owner->name : config('post-comment.defaultOwnerName');
     }
 }
