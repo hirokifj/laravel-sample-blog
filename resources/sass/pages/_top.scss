@@ -12,8 +12,11 @@
 
     &__text {
         @include absCenter;
-
         width: 70%;
+
+        @include respond(phone) {
+            width: 80%;
+        }
     }
 
     &__btn {
@@ -23,6 +26,8 @@
 
         @include respond(phone) {
             display: block;
+            width: 80%;
+            margin: 0 auto;
         }
 
         & .btn {
@@ -36,9 +41,6 @@
                 }
             }
         }
-
-
-
     }
 }
 
@@ -48,6 +50,6 @@
     letter-spacing: 1px;
 
     @include respond(phone) {
-        font-size: 2.6rem;
+        font-size: 2.4rem;
     }
 }
