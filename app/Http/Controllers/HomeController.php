@@ -24,10 +24,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        //ログイン中ユーザーの投稿取得
+        //ログイン中ユーザーの投稿した記事を取得
         $userPosts = auth()->user()->posts()
-            ->searchCat(request('cat_id'))
-            ->searchTitle(request('title'))
+            ->filterCat(request('cat_id'))
+            ->filterTitle(request('title'))
             ->sortDate(request('sort_date'))
             ->paginate(5);
 

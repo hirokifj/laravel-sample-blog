@@ -40,7 +40,7 @@ class Post extends Model
      * @param int|null $categoryId
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeSearchCat($query, $categoryId)
+    public function scopeFilterCat($query, $categoryId)
     {
         if(!is_null($categoryId)) {
             return $query->where('category_id', $categoryId);
@@ -50,13 +50,13 @@ class Post extends Model
     }
 
     /**
-     * 記事タイトルで検索
+     * 記事タイトルでの絞り込み
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @param string|null $word
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeSearchTitle($query, $word)
+    public function scopeFilterTitle($query, $word)
     {
         if(!is_null($word)) {
             return $query->where('title', 'like', '%' . $word . '%');
@@ -93,7 +93,7 @@ class Post extends Model
     }
 
     /**
-     * 記事が当該のタグを保持しているかどうか
+     * 記事が当該タグと関連付いていれば、trueを返す
      *
      * @param int $tagId タグのID
      * @return boolean

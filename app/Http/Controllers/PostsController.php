@@ -24,8 +24,8 @@ class PostsController extends Controller
     {
         // 記事一覧を取得（GETパラメータに応じて絞り込み）
         $posts = Post::with('category')
-            ->searchCat(request('cat_id'))
-            ->searchTitle(request('title'))
+            ->filterCat(request('cat_id'))
+            ->filterTitle(request('title'))
             ->sortDate(request('sort_date'))
             ->paginate(9);
 
@@ -63,7 +63,7 @@ class PostsController extends Controller
         // ユーザーIDを格納
         $attributes['owner_id'] = auth()->id();
 
-        $this->uploadThumbnailIfNeeded($request, $attributes);
+        $this->uploadAndAssignThumbnailIfNeeded($request, $attributes);
 
         Post::create($attributes)
             ->tags()->attach($request->tags);
@@ -113,7 +113,7 @@ class PostsController extends Controller
 
         $attributes = $request->postAttr();
 
-        $this->uploadThumbnailIfNeeded($request, $attributes);
+        $this->uploadAndAssignThumbnailIfNeeded($request, $attributes);
 
         $post->update($attributes);
         $post->tags()->sync($request->tags);
@@ -143,11 +143,11 @@ class PostsController extends Controller
      * $attributesに、アップロード後のファイル名を格納する。
      * 送信されていない場合は、何もしない。
      *
-     * @param array  $request
+     * @param array  App\Http\Requests\PostRequest  $request
      * @param array  $attributes postsテーブルに保存するデータ（参照渡し）
      * @return void
      */
-    protected function uploadThumbnailIfNeeded($request, &$attributes)
+    protected function uploadAndAssignThumbnailIfNeeded($request, &$attributes)
     {
         $thumbnailKeyName = 'thumbnail_img';
 
@@ -156,9 +156,9 @@ class PostsController extends Controller
         }
 
         // 送信された画像をアップロードする
-        $FilePath = $request->file($thumbnailKeyName)->store(config('post-img.thumbnail_upload_dir'));
+        $uploadedFilePath = $request->file($thumbnailKeyName)->store(config('post-img.thumbnail_upload_dir'));
 
         // 画像のファイル名を格納
-        $attributes[$thumbnailKeyName] = basename($FilePath);
+        $attributes[$thumbnailKeyName] = basename($uploadedFilePath);
     }
 }

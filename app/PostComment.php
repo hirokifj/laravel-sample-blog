@@ -24,12 +24,22 @@ class PostComment extends Model
     }
 
     /**
-     * コメントに紐づくユーザーが存在しているかを確認
+     * コメントに紐づくユーザーがDBに存在していれば、trueを返す
      *
      * @return boolean
      */
-    public function isOwnerExists() {
+    protected function isOwnerExists() {
 
         return DB::table('users')->where('id', $this->owner_id)->exists();
+    }
+
+    /**
+     * コメンしたユーザーの、ユーザー名もしくはデフォルト値を返す
+     *
+     * @return string
+     */
+    public function ownerNameOrDefault() {
+
+        return $this->isOwnerExists() ? $this->owner->name : config('post-comment.defaultOwnerName');
     }
 }

@@ -7,7 +7,7 @@
             @foreach($post->comments as $comment)
                 <div class="comment">
                     <div class="comment__heading">
-                        <span class="comment-user">{{ $comment->isOwnerExists() ? $comment->owner->name : '匿名コメント' }}</span>
+                        <span class="comment-user">{{ $comment->ownerNameOrDefault() }}</span>
                         <span class="comment-date">{{ $comment->created_at }}</span>
                     </div>
                     <div class="comment__body">
@@ -32,7 +32,7 @@
             <div class="form__add-info u-mb-small">
                 <p>
                     @guest
-                        「匿名ユーザー」としてコメントします。
+                        「{{ config('post-comment.defaultOwnerName') }}」としてコメントします。
                     @else
                         「{{ auth()->user()->name }}」としてコメントします。
                     @endguest
