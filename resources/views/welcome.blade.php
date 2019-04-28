@@ -10,8 +10,12 @@ TOP
     <div class="hero-box__text u-center-text">
         <h1 class="hero-copy u-mb-small">ブログサービスのサンプル</h1>
         <div class="hero-box__btn">
-            <a class="btn btn--primary" href="{{ route('register') }}">ユーザー登録する</a>
-            <a class="btn btn--ghost" href="{{ route('posts.index') }}">記事を探す</a>
+            @guest
+                <a class="btn btn--primary" href="{{ route('register') }}">ユーザー登録する</a>
+                <a class="btn btn--ghost" href="{{ route('posts.index') }}">記事を探す</a>
+            @else
+                <a class="btn btn--primary" href="{{ route('posts.index') }}">記事を探す</a>
+            @endguest
         </div>
     </div>
 </div>
