@@ -24,7 +24,7 @@ class PostComment extends Model
     }
 
     /**
-     * コメントに紐づくユーザーが存在しているかを確認
+     * コメントに紐づくユーザーがDBに存在していれば、trueを返す
      *
      * @return boolean
      */

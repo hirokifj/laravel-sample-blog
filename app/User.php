@@ -44,7 +44,7 @@ class User extends Authenticatable
     }
 
     /**
-     * 投稿の所有者であればtrueを返す
+     * 記事の所有者であればtrueを返す
      *
      * @param  \App\Post  $post
      * @return boolean
@@ -55,7 +55,7 @@ class User extends Authenticatable
     }
 
     /**
-     * 投稿を編集可能であればtrueを返す
+     * 記事を編集可能であればtrueを返す
      *
      * @param  \App\Post  $post
      * @return boolean

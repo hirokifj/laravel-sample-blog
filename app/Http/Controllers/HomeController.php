@@ -24,7 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        //ログイン中ユーザーの投稿取得
+        //ログイン中ユーザーの投稿した記事を取得
         $userPosts = auth()->user()->posts()
             ->filterCat(request('cat_id'))
             ->filterTitle(request('title'))
