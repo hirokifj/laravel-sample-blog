@@ -37,10 +37,9 @@
                     </div>
                 </div>
                 <div class="form__group">
-                    <label for="thumbnail_img" class="form__label">
-                        <span class="label-text">サムネイル画像</span>
-                    </label>
-                    <input type="file" name="thumbnail_img">
+
+                    <live-preview-input key-name="thumbnail_img"></live-preview-input>
+
                 </div>
                 <div class="form__group">
                     <label for="body" class="form__label">
